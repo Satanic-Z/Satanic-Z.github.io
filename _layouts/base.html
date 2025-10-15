@@ -5,110 +5,88 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title | default: "Blog" }}</title>
-
   <style>
-    /* ===== 颜色系统（Medium 风）===== */
     :root{
-      /* Light */
       --bg:#ffffff; --fg:#242424; --muted:#6b6b6b; --line:#e6e6e6;
-      --accent:#1a8917;             /* Medium 绿 */
-      --wrap:740px;
-      --code-bg:#f6f7f8;
-      --shadow: 0 0 0 rgba(0,0,0,0);
+      --accent:#1a8917; --wrap:740px; --code-bg:#f6f7f8; --shadow:0 0 0 rgba(0,0,0,0);
     }
-    /* Dark (跟随 data-theme) */
     html[data-theme="dark"]{
       --bg:#0e0f12; --fg:#eaeef2; --muted:#9aa3ad; --line:#2a2f36;
-      --accent:#26d07c;            /* 深色里更亮一点的绿 */
-      --code-bg:#11161c;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --accent:#26d07c; --code-bg:#11161c; --shadow:0 10px 30px rgba(0,0,0,.35);
     }
-
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0; background:var(--bg); color:var(--fg);
-      font:17px/1.8 ui-serif, Georgia, "Times New Roman", serif;
-      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-      transition: background .18s ease, color .18s ease;
+      margin:0;background:var(--bg);color:var(--fg);
+      font:17px/1.8 ui-serif,Georgia,"Times New Roman",serif;
+      -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+      transition:background .18s ease,color .18s ease;
     }
-    a{color:var(--accent); text-decoration:none}
+    a{color:var(--accent);text-decoration:none}
     a:hover{text-decoration:underline}
-    .wrap{max-width:var(--wrap); margin:10vh auto 12vh; padding:0 22px}
+    .wrap{max-width:var(--wrap);margin:10vh auto 12vh;padding:0 22px}
 
-    /* 顶部站点信息（首页用） */
-    header.site{margin-bottom:28px; text-align:center}
-    header.site h1{font:700 42px/1.2 ui-serif, Georgia, "Times New Roman", serif; margin:.2em 0 .1em}
-    header.site .sub{color:var(--muted); font:14px; margin:0}
+    /* 首页头部 */
+    header.site{margin-bottom:28px;text-align:center}
+    header.site h1{font:700 42px/1.2 ui-serif,Georgia,"Times New Roman",serif;margin:.2em 0 .1em}
+    header.site .sub{color:var(--muted);font:14px;margin:0}
 
-    /* 首页列表 */
-    .post-list{display:flex; flex-direction:column; gap:24px}
-    .preview{padding:0 0 22px; border-bottom:1px solid var(--line)}
+    /* 列表（首页） */
+    .post-list{display:flex;flex-direction:column;gap:24px}
+    .preview{padding:0 0 22px;border-bottom:1px solid var(--line)}
     .preview:last-child{border-bottom:none}
-    .preview h2{font:700 28px/1.3 ui-serif, Georgia, "Times New Roman", serif; margin:0 0 6px}
-    .meta{color:var(--muted); font:13px; margin:0 0 10px}
+    .preview h2{font:700 28px/1.3 ui-serif,Georgia,"Times New Roman",serif;margin:0 0 6px}
+    .meta{color:var(--muted);font:13px;margin:0 0 10px}
     .excerpt{margin:0}
 
-    /* 文章页 */
-    .post-title{font:800 44px/1.2 ui-serif, Georgia, "Times New Roman", serif; margin:.2em 0 .2em}
-    article.post .meta{margin-bottom:18px}
+    /* 文章/独立页正文 */
+    .post-title{font:800 44px/1.2 ui-serif,Georgia,"Times New Roman",serif;margin:.2em 0 .2em}
     article.post{font-size:18px}
-    article.post img{max-width:100%; height:auto; box-shadow: var(--shadow); border-radius: 6px}
-    article.post blockquote{margin:1.2em 0; padding:0 1.1em; color:var(--muted); border-left:3px solid var(--line)}
-    article.post hr{border:none; border-top:1px solid var(--line); margin:2.2em 0}
-    article.post pre{
-      background:var(--code-bg); border:1px solid var(--line); border-radius:12px;
-      padding:14px; overflow:auto; font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-    }
-    article.post code{
-      font:14px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-      background:var(--code-bg); padding:2px 4px; border-radius:6px;
-    }
-
-    .post-nav{display:flex; justify-content:space-between; gap:12px; margin-top:26px}
+    article.post .meta{margin-bottom:18px}
+    article.post img{max-width:100%;height:auto;box-shadow:var(--shadow);border-radius:6px}
+    article.post blockquote{margin:1.2em 0;padding:0 1.1em;color:var(--muted);border-left:3px solid var(--line)}
+    article.post hr{border:none;border-top:1px solid var(--line);margin:2.2em 0}
+    article.post pre{background:var(--code-bg);border:1px solid var(--line);border-radius:12px;padding:14px;overflow:auto;font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    article.post code{font:14px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--code-bg);padding:2px 4px;border-radius:6px}
+    article.post table{width:100%;border-collapse:collapse;margin:1.2em 0;font-size:16px}
+    article.post th,article.post td{border:1px solid var(--line);padding:.6em .7em}
+    article.post ul,article.post ol{margin:0 0 1.1em 1.4em}
+    .post-nav{display:flex;justify-content:space-between;gap:12px;margin-top:26px}
     .post-nav a{font-size:14px}
 
-    footer.site{margin-top:40px; color:var(--muted); font:13px/1.6 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; text-align:center}
+    footer.site{margin-top:40px;color:var(--muted);font:13px/1.6 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;text-align:center}
 
-    /* 右上角主题切换按钮 */
+    /* 深色切换按钮（全站统一） */
     .theme-toggle{
-      position:fixed; top:18px; right:18px;
-      padding:8px 12px; border-radius:999px;
-      border:1px solid var(--line); background:rgba(255,255,255,.6);
-      color:#222; font:13px; cursor:pointer; user-select:none; backdrop-filter:saturate(160%) blur(10px);
+      position:fixed;top:18px;right:18px;padding:8px 12px;border-radius:999px;
+      border:1px solid var(--line);background:rgba(255,255,255,.6);
+      color:#222;font:13px;cursor:pointer;user-select:none;backdrop-filter:saturate(160%) blur(10px);
     }
-    html[data-theme="dark"] .theme-toggle{
-      background:rgba(20,24,28,.55); color:#eaeef2; border-color:var(--line);
-    }
+    html[data-theme="dark"] .theme-toggle{background:rgba(20,24,28,.55);color:#eaeef2;border-color:var(--line)}
     .theme-toggle:hover{transform:translateY(-1px)}
-    @media (max-width:520px){
-      header.site h1{font-size:34px}
-      .post-title{font-size:36px}
-    }
+    @media (max-width:520px){header.site h1{font-size:34px}.post-title{font-size:36px}}
   </style>
 
-  <!-- 在渲染前决定主题：优先用户选择，其次系统偏好 -->
   <script>
     (function(){
       try{
         var key='theme';
         var saved=localStorage.getItem(key);
         var prefersDark=window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        var theme = (saved==='light'||saved==='dark') ? saved : (prefersDark ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-theme', theme);
+        var theme=(saved==='light'||saved==='dark')?saved:(prefersDark?'dark':'light');
+        document.documentElement.setAttribute('data-theme',theme);
       }catch(e){}
     })();
   </script>
 </head>
 <body>
-  <!-- 切换按钮：🌓 在右上角；点一下在浅/深色之间切换并记住选择 -->
   <button class="theme-toggle" aria-label="切换深色模式" onclick="
     (function(){
       var r=document.documentElement;
       var v=r.getAttribute('data-theme')==='dark'?'light':'dark';
       r.setAttribute('data-theme',v);
-      try{ localStorage.setItem('theme',v);}catch(e){}
-      })()">🌓</button>
+      try{localStorage.setItem('theme',v);}catch(e){}
+    })()">🌓</button>
 
   <main class="wrap">
     {{ content }}
