@@ -1,0 +1,28 @@
+---
+layout: base
+---
+<header class="site">
+  <h1>{{ site.title | default: "Blog" }}</h1>
+  <p class="sub">{{ site.description | default: "研究 / 随笔" }}</p>
+</header>
+
+<section class="post-list">
+  {%- assign posts = site.posts -%}
+  {%- if posts and posts != empty -%}
+    {%- for post in posts limit: 20 -%}
+      <article class="preview">
+        <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+        <p class="meta">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+          {%- if post.tags and post.tags != empty -%} · {{ post.tags | join: " · " }}{%- endif -%}
+        </p>
+        <p class="excerpt">{{ post.excerpt | strip_html | normalize_whitespace | truncate: 160 }}</p>
+      </article>
+    {%- endfor -%}
+  {%- else -%}
+    <article class="preview">
+      <h2>还没有文章</h2>
+      <p class="meta">把 Markdown 放到 <code>_posts/</code>（文件名 <code>YYYY-MM-DD-title.md</code>）</p>
+    </article>
+  {%- endif -%}
+</section>

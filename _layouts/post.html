@@ -1,0 +1,17 @@
+---
+layout: base
+---
+<article class="post">
+  <h1 class="post-title">{{ page.title }}</h1>
+  <p class="meta">
+    <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
+    {%- if page.tags and page.tags != empty -%} · {{ page.tags | join: " · " }}{%- endif -%}
+  </p>
+  <div class="content">
+    {{ content }}
+  </div>
+  <nav class="post-nav">
+    <a href="{{ "/" | relative_url }}">← 返回首页</a>
+    <span></span>
+  </nav>
+</article>
