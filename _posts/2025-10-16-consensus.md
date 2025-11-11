@@ -27,11 +27,11 @@ The adversary model can be divided into static, mildly adaptive, and strongly ad
 2.  **Mildly Adaptive Corruption:** The adversary can change which nodes are corrupted during execution, but they *cannot* corrupt an honest node *after* it has sent a message.
 3.  **Strongly Adaptive Corruption:** The adversary has the power to corrupt a node *after* it has already sent a message.
 
-I'll admit my understanding of this area is still developing, and I don't have a crystal-clear intuition yet. My current understanding is that HotStuff is secure against a strongly adaptive adversary, while protocols in the Algorand family are secure against a mildly adaptive one. If I've made any mistakes here, please correct me in the comments.
+I'll admit my understanding of this area is still developing, and I don't have a crystal-clear intuition yet. 
 
 #### A3: Cryptography Assumptions
 
-Why do we use signatures? What is the role of a hash function? For these topics, I highly recommend the work of Sisi Chen and Xuechao Wang, two incredibly gifted researchers who are currently pushing the frontiers of cryptography.
+Why do we use signatures? What is the role of a hash function? For these topics, I highly recommend the work of Sisi Duan and Xuechao Wang, two incredibly gifted researchers who are currently pushing the frontiers of uncertified consensus protocols.
 
 ### B. Important Modules & Concepts
 
@@ -46,6 +46,9 @@ A key problem the mempool must solve is the **data availability problem**: a mal
 This is not an area I have researched deeply, but I recall the general progression. The "Sleepy Model" was proposed by Elaine Shi et al. and has since evolved into its own subfield. You can refer to Ling Ren's work for more details.
 
 *(Correction: It has been pointed out that modern consensus assumptions can be broadly categorized into three types: the Sleepy model, the Permissionless model, and the classic BFT model.)*
+- The sleepy model relies on the assumption that the node number $n$ can vary over time, with the only requirement being that at any given moment, the number of honest nodes exceeds the number of malicious ones.
+- The permissionless model assumes that nodes can join and leave the network at will, and does not assume a fixed set of participants or an explicit number of $n$.
+- The classic BFT model assumes a fixed set of $n$ nodes, with up to $t$ of them being malicious.
 
 #### B3: Complexity
 
