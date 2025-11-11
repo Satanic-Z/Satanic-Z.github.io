@@ -5,7 +5,7 @@ date: 2025-10-29 00:00 +0800
 ---
 
 
-Monad launched recently—I didn't bother tracking whether it was the testnet or mainnet. Monad (or, more accurately, its devoted flock of Key Opinion Leaders) claims it has achieved the next generation of blockchain architecture, supposedly ready to "dethrone" ETH and "crush" Solana. (I'm genuinely unsure why Solana is dragged into this; a comparison with Sui would at least be more technically logical).
+Monad launched recently—I didn't bother tracking whether it was the testnet or mainnet. Monad (or, more accurately, its devoted flock of Key Opinion Leaders) claims it has achieved the next generation of blockchain architecture, supposedly ready to "dethrone" ETH and "crush" Solana.
 
 Apparently, its specific mechanism is some form of "pre-execution." According to their marketing, this approach drastically improves execution performance, liberating blockchains from execution bottlenecks. Consequently, the user experience is set to be "revolutionized" thanks to its unique mechanics that allegedly increase TPS, lower latency, and drive gas fees to near-zero (I call this the "holy trinity of performance hype"). Therefore, Monad is unrivaled.
 
