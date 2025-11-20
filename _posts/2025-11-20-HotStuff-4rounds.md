@@ -1,4 +1,8 @@
-
+---
+layout: post
+title: "Why does HotStuff Need 4 Rounds?"
+date: 2025-11-20 00:00 +0800
+---
 
 # PBFT’s Quadratic View-Change, Why HotStuff’s 3 Rounds Aren't Enough, and What 4 Rounds Actually Solve
 
