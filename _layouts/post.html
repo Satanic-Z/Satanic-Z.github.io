@@ -10,8 +10,9 @@ layout: base
   <div class="content">
     {{ content }}
   </div>
-  <nav class="post-nav">
-    <a href="{{ "/" | relative_url }}">← main page</a>
-    <span></span>
-  </nav>
-</article>
+  <div class="post-nav">
+    <a href="{{ '/blog/' | relative_url }}">Back</a>
+    {%- if page.next.url -%}
+      <a href="{{ page.next.url | relative_url }}">下一篇</a>
+    {%- endif -%}
+  </div>
