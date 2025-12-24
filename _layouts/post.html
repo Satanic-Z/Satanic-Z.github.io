@@ -12,7 +12,10 @@ layout: base
   </div>
   <div class="post-nav">
     <a href="{{ '/blog/' | relative_url }}">Back</a>
+    {%- if page.previous.url -%}
+      <a href="{{ page.previous.url | relative_url }}">Previous Blog</a>
+    {%- endif -%}
     {%- if page.next.url -%}
-      <a href="{{ page.next.url | relative_url }}">下一篇</a>
+      <a href="{{ page.next.url | relative_url }}">Next Blog</a>
     {%- endif -%}
   </div>
