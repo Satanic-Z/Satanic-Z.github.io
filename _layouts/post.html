@@ -14,7 +14,9 @@ layout: base
   {%- assign posts_grouped = posts_grouped | sort: 'name' | reverse -%}
   {%- assign posts_sorted = '' | split: '' -%}
   {%- for group in posts_grouped -%}
-    {%- assign same_day = group.items | sort_natural: 'title' -%}
+    {%- assign ordered_posts = group.items | where_exp: 'p', 'p.order' | sort: 'order' -%}
+    {%- assign unordered_posts = group.items | where_exp: 'p', 'p.order == nil' | sort_natural: 'title' -%}
+    {%- assign same_day = ordered_posts | concat: unordered_posts -%}
     {%- assign posts_sorted = posts_sorted | concat: same_day -%}
   {%- endfor -%}
   {%- assign newer_post = nil -%}
