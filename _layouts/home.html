@@ -4,9 +4,15 @@ layout: base
 
 
 <section class="post-list">
-  {%- assign posts = site.posts -%}
-  {%- if posts and posts != empty -%}
-    {%- for post in posts limit: 20 -%}
+  {%- assign posts_grouped = site.posts | group_by_exp: 'p', 'p.date | date: "%Y-%m-%d"' -%}
+  {%- assign posts_grouped = posts_grouped | sort: 'name' | reverse -%}
+  {%- assign posts_sorted = '' | split: '' -%}
+  {%- for group in posts_grouped -%}
+    {%- assign same_day = group.items | sort_natural: 'title' -%}
+    {%- assign posts_sorted = posts_sorted | concat: same_day -%}
+  {%- endfor -%}
+  {%- if posts_sorted and posts_sorted != empty -%}
+    {%- for post in posts_sorted limit: 20 -%}
       <article class="preview">
         <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
         <p class="meta">

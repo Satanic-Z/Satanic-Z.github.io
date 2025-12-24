@@ -10,7 +10,13 @@ layout: base
   <div class="content">
     {{ content }}
   </div>
-  {%- assign posts_sorted = site.posts | sort: "date" | reverse -%}
+  {%- assign posts_grouped = site.posts | group_by_exp: 'p', 'p.date | date: "%Y-%m-%d"' -%}
+  {%- assign posts_grouped = posts_grouped | sort: 'name' | reverse -%}
+  {%- assign posts_sorted = '' | split: '' -%}
+  {%- for group in posts_grouped -%}
+    {%- assign same_day = group.items | sort_natural: 'title' -%}
+    {%- assign posts_sorted = posts_sorted | concat: same_day -%}
+  {%- endfor -%}
   {%- assign newer_post = nil -%}
   {%- assign older_post = nil -%}
   {%- for entry in posts_sorted -%}
