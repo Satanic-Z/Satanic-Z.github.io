@@ -10,12 +10,28 @@ layout: base
   <div class="content">
     {{ content }}
   </div>
+  {%- assign posts_sorted = site.posts | sort: "date" | reverse -%}
+  {%- assign newer_post = nil -%}
+  {%- assign older_post = nil -%}
+  {%- for entry in posts_sorted -%}
+    {%- if entry.url == page.url -%}
+      {%- unless forloop.first -%}
+        {%- assign newer_index = forloop.index0 | minus: 1 -%}
+        {%- assign newer_post = posts_sorted[newer_index] -%}
+      {%- endunless -%}
+      {%- unless forloop.last -%}
+        {%- assign older_index = forloop.index0 | plus: 1 -%}
+        {%- assign older_post = posts_sorted[older_index] -%}
+      {%- endunless -%}
+    {%- endif -%}
+  {%- endfor -%}
   <div class="post-nav">
     <a href="{{ '/blog/' | relative_url }}">Back</a>
-    {%- if page.previous.url -%}
-      <a href="{{ page.previous.url | relative_url }}">Previous Blog</a>
+    {%- if newer_post -%}
+      <a href="{{ newer_post.url | relative_url }}">Previous Blog</a>
     {%- endif -%}
-    {%- if page.next.url -%}
-      <a href="{{ page.next.url | relative_url }}">Next Blog</a>
+    {%- if older_post -%}
+      <a href="{{ older_post.url | relative_url }}">Next Blog</a>
     {%- endif -%}
   </div>
+</article>
