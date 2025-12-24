@@ -14,25 +14,14 @@ layout: base
   </div>
 
   <div class="section">
-    <h2><span class="icon">👤</span> About Me</h2>
+    <h2>About Me</h2>
     <div class="content">
       {{ page.bio | markdownify }}
     </div>
   </div>
 
   <div class="section">
-    <h2><span class="icon">🔬</span> Research Interests</h2>
-    <div class="content">
-      <div class="tags">
-        {%- for interest in page.interests -%}
-          <span class="tag">{{ interest }}</span>
-        {%- endfor -%}
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <h2><span class="icon">🎓</span> Education</h2>
+    <h2>Education</h2>
     <div class="content">
       {%- for edu in page.education -%}
         <div class="edu-item">
@@ -50,28 +39,12 @@ layout: base
   </div>
 
   <div class="section">
-    <h2><span class="icon">📄</span> Publications</h2>
+    <h2>Publications</h2>
     <div class="content">
       {%- if page.publications.primary -%}
-        <h3 class="pub-category">As Primary Contributor</h3>
+        <h3 class="pub-category">As Lead Author</h3>
         <ul class="pub-list">
           {%- for pub in page.publications.primary -%}
-            <li>
-              <span class="pub-authors">{{ pub.authors }}</span>
-              <span class="pub-title">"{{ pub.title }},"</span>
-              <span class="pub-venue">{{ pub.venue }}, {{ pub.year }}.</span>
-              {%- if pub.link -%}
-                <a href="{{ pub.link }}" class="pub-link" target="_blank">[PDF]</a>
-              {%- endif -%}
-            </li>
-          {%- endfor -%}
-        </ul>
-      {%- endif -%}
-
-      {%- if page.publications.participant -%}
-        <h3 class="pub-category">As Participant</h3>
-        <ul class="pub-list">
-          {%- for pub in page.publications.participant -%}
             <li>
               <span class="pub-authors">{{ pub.authors }}</span>
               <span class="pub-title">"{{ pub.title }},"</span>
