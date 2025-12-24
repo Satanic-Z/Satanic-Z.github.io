@@ -24,7 +24,65 @@
     }
     a{color:var(--accent);text-decoration:none}
     a:hover{text-decoration:underline}
-    .wrap{max-width:var(--wrap);margin:10vh auto 12vh;padding:0 22px}
+    .wrap{max-width:var(--wrap);margin:4vh auto 12vh;padding:0 22px}
+
+    /* 导航栏 */
+    .nav-tabs{
+      display:flex;justify-content:center;gap:8px;
+      margin-bottom:32px;padding:6px;
+      background:var(--code-bg);border-radius:12px;
+      border:1px solid var(--line);
+    }
+    .nav-tabs a{
+      padding:10px 24px;border-radius:8px;font-size:15px;font-weight:500;
+      color:var(--muted);transition:all .15s ease;
+      font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;
+    }
+    .nav-tabs a:hover{color:var(--fg);background:rgba(255,255,255,.05);text-decoration:none}
+    .nav-tabs a.active{color:var(--fg);background:var(--bg);box-shadow:0 2px 8px rgba(0,0,0,.15)}
+
+    /* About 页面样式 */
+    .about-page .profile-header{text-align:center;margin-bottom:36px}
+    .about-page .name{font-size:42px;font-weight:800;margin:0 0 8px}
+    .about-page .title{color:var(--accent);font-size:18px;margin:0 0 4px;font-weight:500}
+    .about-page .affiliation{color:var(--muted);font-size:15px;margin:0 0 8px}
+    .about-page .contact{margin:0}
+    .about-page .contact a{font-size:14px}
+
+    .about-page .section{margin-bottom:32px}
+    .about-page .section h2{
+      font-size:20px;font-weight:700;margin:0 0 16px;padding-bottom:8px;
+      border-bottom:2px solid var(--line);display:flex;align-items:center;gap:8px;
+    }
+    .about-page .section h2 .icon{font-size:18px}
+    .about-page .content{padding-left:4px}
+
+    .about-page .tags{display:flex;flex-wrap:wrap;gap:8px}
+    .about-page .tag{
+      background:var(--code-bg);border:1px solid var(--line);
+      padding:6px 14px;border-radius:20px;font-size:14px;color:var(--fg);
+      font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;
+    }
+
+    .about-page .edu-item{margin-bottom:18px}
+    .about-page .edu-item:last-child{margin-bottom:0}
+    .about-page .edu-header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
+    .about-page .edu-degree{font-weight:600;font-size:16px}
+    .about-page .edu-time{color:var(--muted);font-size:14px;font-family:ui-sans-serif,system-ui,sans-serif}
+    .about-page .edu-school{color:var(--accent);font-size:15px;margin-top:2px}
+    .about-page .edu-location{color:var(--muted);font-size:14px}
+
+    .about-page .pub-category{font-size:15px;font-weight:600;margin:16px 0 12px;color:var(--muted)}
+    .about-page .pub-category:first-child{margin-top:0}
+    .about-page .pub-list{list-style:none;padding:0;margin:0}
+    .about-page .pub-list li{
+      margin-bottom:14px;padding:14px;background:var(--code-bg);
+      border:1px solid var(--line);border-radius:10px;font-size:15px;line-height:1.6;
+    }
+    .about-page .pub-authors{color:var(--muted)}
+    .about-page .pub-title{color:var(--fg);font-weight:600}
+    .about-page .pub-venue{color:var(--accent);font-style:italic}
+    .about-page .pub-link{margin-left:8px;font-size:13px}
 
     /* 首页头部 */
     header.site{margin-bottom:28px;text-align:center}
@@ -64,7 +122,7 @@
     }
     html[data-theme="dark"] .theme-toggle{background:rgba(20,24,28,.55);color:#eaeef2;border-color:var(--line)}
     .theme-toggle:hover{transform:translateY(-1px)}
-    @media (max-width:520px){header.site h1{font-size:34px}.post-title{font-size:36px}}
+    @media (max-width:520px){header.site h1{font-size:34px}.post-title{font-size:36px}.about-page .name{font-size:32px}.nav-tabs a{padding:8px 16px;font-size:14px}}
   </style>
 
 <script>
@@ -89,6 +147,10 @@
     })()">🌓</button>
 
   <main class="wrap">
+    <nav class="nav-tabs">
+      <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
+      <a href="{{ '/blog/' | relative_url }}" {% if page.url == '/blog/' or page.layout == 'post' %}class="active"{% endif %}>Blog</a>
+    </nav>
     {{ content }}
     <footer class="site">© {{ "now" | date: "%Y" }} {{ site.author | default: "Yifan" }}</footer>
   </main>
